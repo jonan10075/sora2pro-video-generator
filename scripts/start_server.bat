@@ -1,19 +1,54 @@
 @echo off
-REM start_server.bat - Launch the Sora2Pro Video Generator server (APIMart)
+setlocal
 
-REM Create virtual environment if it doesn't exist
+REM =======================
+REM  Ir a la raíz del proyecto
+REM =======================
+cd /d "%~dp0.."
+
+REM =======================
+REM  Crear y activar el entorno virtual
+REM =======================
 if not exist venv (
+  echo [INFO] Creando entorno virtual...
   python -m venv venv
 )
 
-REM Activate virtual environment
 call venv\Scripts\activate.bat
 
-REM Install required Python packages
-pip install -r backend\requirements.txt
+REM =======================
+REM  Instalar dependencias
+REM =======================
+if exist backend\requirements.txt (
+  python -m pip install --upgrade pip
+  pip install -r backend\requirements.txt
+) else (
+  echo [ERROR] No se encuentra backend\requirements.txt
+  pause
+  exit /b 1
+)
 
-REM TODO: Replace YOUR_APIMART_API_KEY with your actual APIMart API key or set APIMART_API_KEY environment variable.
-set APIMART_API_KEY=YOUR_APIMART_API_KEY
+REM =======================
+REM  API key de APIMart
+REM  >>> CAMBIA ESTO POR TU CLAVE <<<
+REM =======================
+set "APIMART_API_KEY=YOUR_APIMART_API_KEY"
 
-REM Run the Flask application
+if "%APIMART_API_KEY%"=="" (
+  echo [ERROR] La variable APIMART_API_KEY no está definida.
+  echo Edita start_server.bat y escribe tu clave de APIMart.
+  pause
+  exit /b 1
+)
+
+REM =======================
+REM  Lanzar el servidor Flask
+REM =======================
+echo [INFO] Iniciando servidor...
 python backend\app.py
+
+echo.
+echo Si ves errores arriba, revisa la configuracion.
+pause
+endlocal
+
