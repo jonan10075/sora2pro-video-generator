@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sora 2 Pro Video Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        label { display: block; margin-top: 10px; }
+        textarea { width: 100%; min-height: 100px; resize: vertical; }
+        input[type="file"], select, button { margin-top: 10px; }
+        #status { margin-top: 20px; }
+        video { margin-top: 20px; max-width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Sora 2 Pro Video Generator</h1>
+
+    <label for="prompt">Prompt</label>
+    <textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+
+    <label for="image">Initial image (1792×1024)</label>
+    <input type="file" id="image" accept="image/png, image/jpeg, image/webp">
+
+    <label for="duration">Duration</label>
+    <select id="duration">
+        <option value="15">15 seconds</option>
+        <option value="25">25 seconds</option>
+    </select>
+
+    <button id="generateBtn">Generate Video</button>
+
+    <div id="status"></div>
+    <video id="videoPlayer" controls></video>
+
+    <script>
+        const promptField = document.getElementById('prompt');
+        const imageField = document.getElementById('image');
+        const durationField = document.getElementById('duration');
+        const statusDiv = document.getElementById('status');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const generateBtn = document.getElementById('generateBtn');
+
+        generateBtn.addEventListener('click', async () => {
+            const prompt = promptField.value.trim();
+            const file = imageField.files[0];
+            const duration = durationField.value;
+
+            if (!file) {
+                statusDiv.textContent = 'Please select an image file.';
+                return;
+            }
+
+            statusDiv.textContent = 'Uploading and generating video...';
+            videoPlayer.src = '';
+
+            const formData = new FormData();
+            formData.append('prompt', prompt);
+            formData.append('duration', duration);
+            formData.append('image', file);
+
+            try {
+                const response = await fetch('/generate', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    statusDiv.textContent = 'Video ready!';
+                    videoPlayer.src = result.video_url;
+                    videoPlayer.load();
+                } else {
+                    statusDiv.textContent = 'Error: ' + (result.error || 'Unknown error');
+                }
+            } catch (err) {
+                statusDiv.textContent = 'Error: ' + err.toString();
+            }
+        });
+    </script>
+</body>
+</html>
