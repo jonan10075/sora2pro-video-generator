@@ -136,4 +136,5 @@ def generate():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Enable threading so the Flask server can handle multiple requests concurrently
+    app.run(debug=True, threaded=True)
