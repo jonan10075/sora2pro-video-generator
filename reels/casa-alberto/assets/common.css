@@ -1,0 +1,45 @@
+@font-face { font-family: 'Anton'; src: url('fonts/Anton.woff2') format('woff2'); }
+@font-face { font-family: 'Bebas Neue'; src: url('fonts/BebasNeue.woff2') format('woff2'); }
+@font-face { font-family: 'Playfair'; font-style: italic; font-weight: 900; src: url('fonts/PlayfairDisplay-BlackItalic.woff2') format('woff2'); }
+@font-face { font-family: 'Marker'; src: url('fonts/PermanentMarker.woff2') format('woff2'); }
+
+:root {
+  --wine: #931237;
+  --wine-dark: #5c0a22;
+  --wine-deep: #2a0610;
+  --cream: #f7efe4;
+  --gold: #f4b740;
+  --gold-deep: #d9861e;
+  --ink: #120709;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--ink); }
+body { font-family: 'Inter', 'Noto Color Emoji', sans-serif; color: var(--cream); -webkit-font-smoothing: antialiased; }
+
+#stage { position: absolute; inset: 0; overflow: hidden; }
+.abs { position: absolute; }
+.center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.anton { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 1px; line-height: .92; }
+.bebas { font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
+.marker { font-family: 'Marker', cursive; }
+.playfair { font-family: 'Playfair', serif; font-style: italic; font-weight: 900; }
+.emoji { font-family: 'Noto Color Emoji'; }
+
+/* Film grain + vignette overlay shared by every reel */
+#grain { position: absolute; inset: -50%; pointer-events: none; opacity: .07; mix-blend-mode: overlay; z-index: 900;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+#vignette { position: absolute; inset: 0; pointer-events: none; z-index: 899;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,.55) 100%); }
+#flash { position: absolute; inset: 0; background: #fff; opacity: 0; z-index: 950; pointer-events: none; }
+
+/* Shared end card */
+#end { position: absolute; inset: 0; background: radial-gradient(circle at 50% 40%, #b0173f 0%, #7a0f2c 45%, #34060f 100%); opacity: 0; overflow: hidden; display: none; }
+#rays { position: absolute; left: 50%; top: 40%; width: 3200px; height: 3200px; margin: -1600px 0 0 -1600px; opacity: .14;
+  background: repeating-conic-gradient(from 0deg, #fff 0deg 7deg, transparent 7deg 22.5deg); border-radius: 50%; }
+#endtop { position: absolute; left: 0; right: 0; top: 260px; text-align: center; font-size: 96px; }
+#endlogo { position: absolute; left: 50%; top: 790px; width: 700px; height: 700px; filter: drop-shadow(0 30px 50px rgba(0,0,0,.45)); }
+#addr { position: absolute; left: 0; right: 0; top: 1190px; text-align: center; font-size: 104px; color: var(--cream); }
+#phone { position: absolute; left: 50%; top: 1340px; background: var(--cream); color: var(--wine); font-size: 70px; font-weight: 900; padding: 22px 56px; border-radius: 80px; white-space: nowrap; box-shadow: 0 14px 0 #c9b9a5; }
+#tags { position: absolute; left: 0; right: 0; top: 1520px; text-align: center; font-size: 52px; color: var(--gold); }
+.spark { position: absolute; left: 0; top: 0; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 18px var(--gold); }

@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel 3 · Curiosidades de Tudela</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+  #bg { position: absolute; inset: 0; background: linear-gradient(180deg, #1c0810 0%, #3a0c1b 55%, #64122e 100%); }
+  #sun { position: absolute; left: 50%; top: 1230px; width: 760px; height: 760px; margin-left: -380px; border-radius: 50%;
+    background: radial-gradient(circle, #ffcf6e 0%, #f4b740 35%, rgba(244,183,64,0) 70%); opacity: .55; }
+  svg#skyline { position: absolute; left: 0; bottom: 0; width: 1080px; height: 520px; }
+
+  #hook { position: absolute; left: 0; right: 0; top: 380px; text-align: center; }
+  #hook .n { font-size: 400px; color: var(--gold); line-height: .9; display: inline-block; }
+  #hook .a { font-size: 150px; color: var(--cream); display: inline-block; }
+  #hook .b { font-size: 70px; color: var(--cream); display: inline-block; margin-top: 30px; }
+  #hook .c { display: inline-block; margin-top: 40px; font-size: 64px; color: var(--ink); background: var(--gold); padding: 10px 34px 16px; border-radius: 18px; }
+
+  #dots { position: absolute; left: 50%; top: 230px; transform: translateX(-50%); display: flex; gap: 18px; opacity: 0; }
+  #dots i { width: 120px; height: 12px; border-radius: 6px; background: rgba(247,239,228,.22); overflow: hidden; display: block; position: relative; }
+  #dots i b { position: absolute; inset: 0; background: var(--gold); transform-origin: left; transform: scaleX(0); }
+
+  .fact { position: absolute; inset: 0; opacity: 0; }
+  .fact .num { position: absolute; left: 50%; top: 270px; transform: translateX(-50%); font-size: 560px; color: transparent;
+    -webkit-text-stroke: 6px rgba(244,183,64,.35); white-space: nowrap; }
+  .fact svg.icon { position: absolute; left: 50%; top: 430px; width: 620px; height: 560px; margin-left: -310px; overflow: visible; }
+  .fact .ttl { position: absolute; left: 60px; right: 60px; top: 1030px; text-align: center; font-size: 112px; color: var(--cream); }
+  .fact .ttl em { font-style: normal; color: var(--gold); }
+  .fact .txt { position: absolute; left: 90px; right: 90px; top: 1290px; text-align: center; font-size: 50px; line-height: 1.32; font-weight: 600; color: #f1e3d6; }
+  .fact .kicker { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 56px; color: var(--gold); letter-spacing: 6px; }
+
+  /* map */
+  #map { position: absolute; inset: 0; opacity: 0; background: #f3eadf; overflow: hidden; }
+  #map > svg { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #mapTitle { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 66px; color: var(--wine); letter-spacing: 3px; }
+  #mapTitle b { display: block; font-size: 150px; color: var(--ink); letter-spacing: 1px; font-weight: 400; }
+  #pinCard { position: absolute; left: 50%; top: 1290px; background: #fff; color: var(--ink); border-radius: 36px; padding: 28px 40px 28px 30px;
+    display: flex; gap: 28px; align-items: center; box-shadow: 0 30px 60px rgba(60,10,20,.35); white-space: nowrap; opacity: 0; }
+  #pinCard .logo { width: 150px; height: 150px; flex: none; }
+  #pinCard .n { font-size: 60px; font-weight: 900; }
+  #pinCard .a { font-size: 40px; color: #6b5a5f; font-weight: 600; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <div id="sun"></div>
+  <svg id="skyline" viewBox="0 0 1080 520" preserveAspectRatio="none">
+    <!-- Cerro de Santa Bárbara with the Corazón de Jesús monument, cathedral tower and rooftops -->
+    <path d="M 0 330 Q 120 250 230 230 Q 300 222 360 250 Q 420 280 470 330 L 470 520 L 0 520 Z" fill="#4a0d20"/>
+    <rect x="221" y="120" width="18" height="112" fill="#4a0d20"/>
+    <rect x="206" y="150" width="48" height="12" fill="#4a0d20"/>
+    <circle cx="230" cy="110" r="14" fill="#4a0d20"/>
+    <path d="M 520 520 L 520 300 L 540 300 L 540 220 L 560 190 L 580 220 L 580 300 L 600 300 L 600 520 Z" fill="#3b0918"/>
+    <path d="M 610 520 L 610 380 L 700 340 L 790 380 L 790 520 Z" fill="#3b0918"/>
+    <path d="M 380 520 L 380 400 L 450 370 L 520 400 L 520 520 Z M 790 520 L 790 410 L 860 380 L 930 410 L 930 520 Z M 920 520 L 920 360 L 1000 330 L 1080 360 L 1080 520 Z" fill="#300713"/>
+    <rect x="0" y="470" width="1080" height="50" fill="#230510"/>
+  </svg>
+
+  <div id="hook">
+    <div><span class="n anton">6</span></div>
+    <div><span class="a anton">curiosidades</span></div>
+    <div><span class="a anton" style="color:var(--gold)">de Tudela</span></div>
+    <div><span class="b anton">que (seguro) no sabías</span></div>
+    <div><span class="c marker">¡la última da hambre! 😋</span></div>
+  </div>
+
+  <div id="dots"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+
+  <!-- 1 -->
+  <div class="fact" id="f1">
+    <div class="num anton">01</div>
+    <svg class="icon" viewBox="0 0 620 560">
+      <g class="draw">
+        <path d="M 130 540 L 130 300 A 180 180 0 1 1 490 300 L 490 540" fill="none" stroke="#f7efe4" stroke-width="14"/>
+        <g class="voussoirs"></g>
+        <path d="M 190 540 L 190 300 A 120 120 0 1 1 430 300 L 430 540" fill="none" stroke="#f4b740" stroke-width="10"/>
+      </g>
+      <text x="310" y="330" text-anchor="middle" font-family="Anton" font-size="120" fill="#f4b740">802</text>
+    </svg>
+    <div class="ttl anton">Nació en el año <em>802</em></div>
+    <div class="txt">Tudela fue fundada en época andalusí. ¡Más de 1.200 años de historia en sus calles!</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="fact" id="f2">
+    <div class="num anton">02</div>
+    <svg class="icon" viewBox="0 0 620 560">
+      <g fill="none" stroke-linejoin="round">
+        <path d="M 60 540 L 60 260 Q 60 60 310 10 Q 560 60 560 260 L 560 540" stroke="#f7efe4" stroke-width="12"/>
+        <path d="M 120 540 L 120 280 Q 120 120 310 75 Q 500 120 500 280 L 500 540" stroke="#f4b740" stroke-width="10"/>
+        <path d="M 180 540 L 180 300 Q 180 180 310 140 Q 440 180 440 300 L 440 540" stroke="#f7efe4" stroke-width="10"/>
+        <path d="M 240 540 L 240 320 Q 240 240 310 205 Q 380 240 380 320 L 380 540" stroke="#f4b740" stroke-width="10"/>
+      </g>
+      <g class="figs"></g>
+    </svg>
+    <div class="ttl anton">La <em>Puerta</em> del Juicio</div>
+    <div class="txt">La portada de su catedral tiene más de 100 grupos esculpidos sobre el Juicio Final.</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="fact" id="f3">
+    <div class="num anton">03</div>
+    <svg class="icon" viewBox="0 0 620 560">
+      <path d="M 0 140 L 0 560 L 110 560 L 110 160 Z M 510 220 L 510 560 L 620 560 L 620 200 Z" fill="#4a0d20" stroke="#f7efe4" stroke-width="6"/>
+      <line x1="60" y1="150" x2="560" y2="230" stroke="#f7efe4" stroke-width="5" stroke-dasharray="2 0"/>
+      <g id="angel">
+        <line x1="0" y1="0" x2="0" y2="40" stroke="#f7efe4" stroke-width="4"/>
+        <path d="M -6 70 C -90 20 -130 60 -150 110 C -100 100 -60 110 -10 100 Z" fill="#fff"/>
+        <path d="M 6 70 C 90 20 130 60 150 110 C 100 100 60 110 10 100 Z" fill="#fff"/>
+        <circle cx="0" cy="58" r="22" fill="#ffd9b5"/>
+        <ellipse cx="0" cy="30" rx="24" ry="7" fill="none" stroke="#f4b740" stroke-width="5"/>
+        <path d="M -30 80 L 30 80 L 45 190 L -45 190 Z" fill="#f7efe4"/>
+      </g>
+      <g class="stars"></g>
+    </svg>
+    <div class="ttl anton">Un <em>ángel</em> que vuela</div>
+    <div class="txt">Cada Domingo de Resurrección, un niño vestido de ángel desciende sobre la Plaza de los Fueros.</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="fact" id="f4">
+    <div class="num anton">04</div>
+    <svg class="icon" viewBox="0 0 620 560">
+      <g id="choke" transform="translate(310 300)"></g>
+    </svg>
+    <div class="ttl anton">Reina de la <em>verdura</em></div>
+    <div class="txt">Alcachofas, cogollos, espárragos… La huerta de la Ribera es famosa en toda España.</div>
+  </div>
+
+  <!-- 5 -->
+  <div class="fact" id="f5">
+    <div class="num anton">05</div>
+    <svg class="icon" viewBox="0 0 620 560">
+      <defs><linearGradient id="dune" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8a55a"/><stop offset="1" stop-color="#a35a24"/></linearGradient></defs>
+      <circle id="bsun" cx="460" cy="160" r="80" fill="#f4b740"/>
+      <path d="M 0 560 L 0 470 Q 160 430 300 460 Q 470 420 620 450 L 620 560 Z" fill="#7a3a17"/>
+      <path d="M 250 460 L 262 330 L 238 300 L 250 230 L 290 160 L 330 160 L 370 230 L 382 300 L 358 330 L 370 460 Z" fill="url(#dune)" stroke="#f7efe4" stroke-width="6" stroke-linejoin="round"/>
+      <path d="M 262 330 L 358 330 M 250 230 L 370 230" stroke="#7a3a17" stroke-width="6"/>
+      <g id="dragon" fill="#f7efe4">
+        <path d="M 0 0 C 30 -10 50 -6 70 0 C 50 -40 20 -50 -10 -60 C 10 -40 10 -20 0 0 Z"/>
+        <path d="M 0 0 C -30 -10 -50 -6 -70 0 C -50 -40 -20 -50 10 -60 C -10 -40 -10 -20 0 0 Z"/>
+        <path d="M -10 0 L 60 6 L 40 -4 Z"/>
+      </g>
+    </svg>
+    <div class="ttl anton">Tierra de <em>dragones</em></div>
+    <div class="txt">Las Bardenas Reales, a un paso de Tudela, fueron escenario de Juego de Tronos.</div>
+  </div>
+
+  <!-- 6: map -->
+  <div id="map">
+    <svg viewBox="0 0 1080 1920">
+      <g id="streets" stroke="#ffffff" stroke-linecap="round" fill="none"></g>
+      <path id="river" d="M -50 1700 C 200 1600 300 1750 520 1660 S 900 1500 1130 1560" stroke="#a8c8e0" stroke-width="70" fill="none"/>
+      <path id="route" d="M 160 1560 L 160 1180 L 420 1180 L 420 980 L 640 980 L 640 860" stroke="#931237" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="14 22"/>
+      <circle id="you" cx="160" cy="1560" r="22" fill="#2d7ff9" stroke="#fff" stroke-width="8"/>
+      <g id="pin" transform="translate(640 860)">
+        <ellipse cx="0" cy="6" rx="34" ry="12" fill="rgba(0,0,0,.25)"/>
+        <g id="pinBody">
+          <path d="M 0 0 C -20 -40 -70 -80 -70 -140 A 70 70 0 1 1 70 -140 C 70 -80 20 -40 0 0 Z" fill="#931237" stroke="#fff" stroke-width="8"/>
+          <circle cx="0" cy="-140" r="30" fill="#fff"/>
+        </g>
+      </g>
+      <circle id="ripple" cx="640" cy="860" r="40" fill="none" stroke="#931237" stroke-width="8"/>
+    </svg>
+    <div id="mapTitle" class="anton">06 · La más importante<b>De tapa en tapa</b></div>
+    <div id="pinCard">
+      <div class="logo"></div>
+      <div><div class="n">Casa Alberto</div><div class="a">C/ Muro 27 · Tudela</div></div>
+    </div>
+  </div>
+
+  <div id="end" data-headline="Te esperamos 🍻"></div>
+</div>
+
+<script src="../assets/common.js"></script>
+<script>
+window.DURATION = 29;
+const FACT_START = 2.9, FACT_LEN = 3.65;
+const T = { map: FACT_START + 5 * FACT_LEN, end: FACT_START + 5 * FACT_LEN + 4.6 };
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+
+window.SFX = [
+  { t: 0.05, type: 'hit' }, { t: .5, type: 'pop' }, { t: .8, type: 'pop' }, { t: 1.2, type: 'pop' }, { t: 1.6, type: 'pop' },
+  ...[0, 1, 2, 3, 4].flatMap(i => [{ t: FACT_START + i * FACT_LEN - .25, type: 'whoosh', dur: .5 }, { t: FACT_START + i * FACT_LEN + .2, type: 'hit', gain: .5 }]),
+  { t: T.map - .25, type: 'whoosh' }, { t: T.map + 2.3, type: 'pop' }, { t: T.map + 2.5, type: 'ding' },
+  { t: T.end - 1, type: 'riser', dur: 1 }, { t: T.end, type: 'impact' },
+];
+window.MUSIC = { style: 'upbeat', bpm: 118 };
+
+window.addEventListener('DOMContentLoaded', () => {
+  // horseshoe-arch voussoirs, alternating like Andalusian arches
+  const v = $('#f1 .voussoirs');
+  for (let k = 0; k <= 16; k++) {
+    const a0 = Math.PI * (-.15 + k * 1.3 / 17), a1 = a0 + Math.PI * 1.3 / 17;
+    const p = (r, a) => `${310 - Math.cos(a) * r} ${300 - Math.sin(a) * r}`;
+    el('path', { d: `M ${p(126, a0)} L ${p(174, a0)} A 174 174 0 0 1 ${p(174, a1)} L ${p(126, a1)} A 126 126 0 0 0 ${p(126, a0)} Z`, fill: k % 2 ? '#931237' : '#f7efe4', class: 'vs' }, v);
+  }
+  // little sculpted figures on the portal
+  const figs = $('#f2 .figs'), r = mulberry32(9);
+  [[90, 1], [150, 1], [210, 1]].forEach(([inset]) => {
+    for (let k = 0; k < 9; k++) {
+      const a = Math.PI * (k / 8);
+      const rx = 250 - inset * .9, ry = 230 - inset * .9;
+      const x = 310 - Math.cos(a) * rx, y = 330 - Math.sin(a) * ry;
+      el('circle', { cx: x, cy: y, r: 9, fill: '#f7efe4', class: 'fig' }, figs);
+    }
+  });
+  // sparkles behind the angel
+  const st = $('#f3 .stars');
+  for (let k = 0; k < 14; k++) el('circle', { cx: 120 + r() * 380, cy: 60 + r() * 420, r: 3 + r() * 5, fill: '#f4b740', class: 'star' }, st);
+  // artichoke: layered petals
+  const ch = $('#choke');
+  el('path', { d: 'M -12 170 Q -18 230 -40 260 L -10 260 Q 8 230 12 170 Z', fill: '#4f7a2a' }, ch);
+  const rows = [[3, 80, 150], [4, 130, 100], [5, 160, 45], [5, 150, -10], [4, 115, -65], [3, 70, -115]];
+  rows.forEach(([n, w, y], ri) => {
+    for (let k = 0; k < n; k++) {
+      const x = (k - (n - 1) / 2) * (w * 2 / n);
+      el('path', { class: 'petal', 'data-row': ri, d: `M ${x - w / n - 14} ${y + 40} Q ${x} ${y - 90} ${x + w / n + 14} ${y + 40} Q ${x} ${y + 70} ${x - w / n - 14} ${y + 40} Z`,
+        fill: ['#4f7f28', '#5f8f2e', '#6fa036', '#7bab3c', '#88b648', '#98c456'][ri], stroke: '#3e5f1c', 'stroke-width': 5 }, ch);
+    }
+  });
+  // map streets: a stylised old-town grid
+  const s = $('#streets'), rr = mulberry32(3);
+  for (let k = 0; k < 14; k++) el('path', { d: `M -50 ${300 + k * 120 + rr() * 30} L 1130 ${280 + k * 120 + rr() * 60}`, 'stroke-width': 18 + (k % 4 === 0 ? 16 : 0) }, s);
+  for (let k = 0; k < 10; k++) el('path', { d: `M ${40 + k * 120 + rr() * 30} 200 L ${20 + k * 120 + rr() * 60} 1800`, 'stroke-width': 18 + (k % 3 === 0 ? 14 : 0) }, s);
+  for (let k = 0; k < 18; k++) el('rect', { x: rr() * 1000, y: 300 + rr() * 1300, width: 40 + rr() * 80, height: 40 + rr() * 80, rx: 8, fill: '#e3d6c6', stroke: 'none' }, s);
+});
+
+function factEnv(i, t) {
+  const a = FACT_START + i * FACT_LEN, b = a + FACT_LEN;
+  const pin = prog(t, a - .15, .4, E.outExpo);
+  const pout = prog(t, b - .3, .3, E.inExpo);
+  return { a, pin, pout, on: t > a - .2 && t < b + .05 };
+}
+
+window.renderFrame = function (t) {
+  // ---------- hook ----------
+  const hookOut = prog(t, FACT_START - .35, .3, E.inExpo);
+  $('#hook').style.display = hookOut < 1 ? 'block' : 'none';
+  $$('#hook span').forEach((s, i) => {
+    const p = prog(t, .05 + i * .38, .45, E.outBack);
+    style(s, { y: (1 - p) * 100 - hookOut * 300, s: .5 + .5 * p, o: clamp(p * 2) * (1 - hookOut), r: i === 4 ? -3 : 0 });
+  });
+  const sk = 1 - prog(t, FACT_START - .4, .6) * .6 + prog(t, T.map - .4, .4) * .6;
+  $('#skyline').style.opacity = sk;
+  $('#skyline').style.transform = `translateY(${(1 - prog(t, 0, 1.2)) * 200}px)`;
+  $('#sun').style.transform = `translateY(${-prog(t, 0, 28, E.linear) * 260}px)`;
+
+  // ---------- progress dots ----------
+  const dIn = prog(t, FACT_START - .2, .4) * (1 - prog(t, T.map + .1, .3));
+  $('#dots').style.opacity = dIn;
+  $$('#dots b').forEach((b, i) => { b.style.transform = `scaleX(${clamp((t - FACT_START - i * FACT_LEN) / FACT_LEN)})`; });
+
+  // ---------- facts ----------
+  for (let i = 0; i < 5; i++) {
+    const f = $(`#f${i + 1}`);
+    const { a, pin, pout, on } = factEnv(i, t);
+    f.style.display = on ? 'block' : 'none';
+    if (!on) continue;
+    f.style.opacity = 1;
+    const x = (1 - pin) * 1080 - pout * 1080;
+    f.style.transform = `translateX(${x}px) skewX(${(1 - pin) * -12 + pout * 12}deg)`;
+    f.style.filter = (pin < .95 || pout > .05) ? `blur(${(1 - pin + pout) * 12}px)` : 'none';
+    const lt = t - a;
+    f.querySelector('.num').style.transform = `translateX(-50%) scale(${1 + lt * .03})`;
+    const icon = f.querySelector('svg.icon');
+    const ip = prog(t, a + .1, .6, E.outBack);
+    icon.style.transform = `scale(${.6 + .4 * ip}) translateY(${Math.sin(lt * 2) * 8}px)`;
+    icon.style.opacity = clamp(ip * 2);
+    const tp = prog(t, a + .35, .5, E.outBack);
+    style(f.querySelector('.ttl'), { y: (1 - tp) * 80, o: clamp(tp * 2) });
+    const xp = prog(t, a + .7, .5);
+    style(f.querySelector('.txt'), { y: (1 - xp) * 40, o: xp });
+  }
+  // per-icon details
+  $$('#f1 .vs').forEach((v, k) => v.setAttribute('opacity', clamp((t - FACT_START - .2 - k * .05) * 6)));
+  $$('#f2 .fig').forEach((c, k) => c.setAttribute('opacity', clamp((t - FACT_START - FACT_LEN - .3 - k * .04) * 5)));
+  {
+    const lt = clamp((t - FACT_START - 2 * FACT_LEN - .2) / 2.6);
+    const e = E.inOutCubic(lt);
+    const x = lerp(90, 520, e), y = lerp(155, 224, e);
+    $('#angel').setAttribute('transform', `translate(${x} ${y}) rotate(${Math.sin(t * 5) * 4})`);
+    $$('#f3 .star').forEach((s, k) => s.setAttribute('opacity', .3 + .7 * Math.abs(Math.sin(t * 3 + k))));
+  }
+  $$('#f4 .petal').forEach(p => {
+    const row = +p.dataset.row;
+    const k = prog(t, FACT_START + 3 * FACT_LEN + .1 + row * .12, .4, E.outBack);
+    p.setAttribute('transform', `scale(${k})`);
+  });
+  {
+    const lt = t - FACT_START - 4 * FACT_LEN;
+    $('#dragon').setAttribute('transform', `translate(${lerp(-60, 680, clamp(lt / 3.4))} ${120 + Math.sin(lt * 3) * 25}) scale(${.9 + .15 * Math.sin(lt * 12)}, ${.6 + .5 * Math.abs(Math.sin(lt * 8))})`);
+    $('#bsun').setAttribute('r', 80 + 6 * Math.sin(t * 2));
+  }
+
+  // ---------- map ----------
+  const m = $('#map');
+  const mIn = prog(t, T.map - .2, .5, E.outExpo);
+  m.style.display = mIn > 0 && t < T.end + .3 ? 'block' : 'none';
+  m.style.opacity = 1;
+  m.style.clipPath = `circle(${mIn * 120}% at 50% 100%)`;
+  const zoom = 1.25 - .25 * prog(t, T.map, 3.5, E.outCubic);
+  m.querySelector(':scope > svg').style.transform = `scale(${zoom})`;
+  m.querySelector(':scope > svg').style.transformOrigin = '640px 860px';
+  const mt = prog(t, T.map + .2, .5, E.outBack);
+  style($('#mapTitle'), { y: (1 - mt) * -80, o: clamp(mt * 2) });
+  const route = $('#route');
+  const len = 1390;
+  const rp = prog(t, T.map + .4, 1.7, E.inOutCubic);
+  route.style.strokeDasharray = `${len * rp} ${len}`;
+  const pinP = prog(t, T.map + 2.0, .55, E.outBack);
+  $('#pinBody').setAttribute('transform', `translate(0 ${(1 - pinP) * -500}) scale(${1 + .15 * Math.sin(clamp((t - T.map - 2.3) / .3) * Math.PI)}, ${1 - .15 * Math.sin(clamp((t - T.map - 2.3) / .3) * Math.PI)})`);
+  $('#pin').setAttribute('opacity', clamp(pinP * 3));
+  const rip = ((t - T.map - 2.4) % 1.2 + 1.2) % 1.2;
+  $('#ripple').setAttribute('r', 40 + rip * 120);
+  $('#ripple').setAttribute('opacity', t > T.map + 2.4 ? (1 - rip / 1.2) * .8 : 0);
+  const pc = prog(t, T.map + 2.4, .5, E.outBack);
+  $('#pinCard').style.opacity = clamp(pc * 2);
+  $('#pinCard').style.transform = `translateX(-50%) translateY(${(1 - pc) * 60}px) scale(${.7 + .3 * pc})`;
+  $('#you').setAttribute('r', 22 + 4 * Math.sin(t * 6));
+
+  renderEnd(t, T.end);
+  overlays(t, [[0.05, .25, .5], [T.end, .35, .9]]);
+};
+</script>
+</body>
+</html>

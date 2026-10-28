@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel 1 · Le pregunté a la IA</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+  #bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 35%, #3a0b1a 0%, #140609 60%, #0b0405 100%); }
+
+  /* Scene A: hook */
+  #hook { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; text-align: center; }
+  #hook .l { font-size: 132px; display: inline-block; }
+  #hook .gold { color: var(--gold); }
+  #hook .eyes { font-size: 190px; margin-top: 30px; }
+
+  /* Scene B: chat UI */
+  #chat { position: absolute; inset: 0; background: #212121; transform-origin: 50% 50%; }
+  #topbar { position: absolute; left: 0; right: 0; top: 150px; height: 110px; display: flex; align-items: center; padding: 0 56px; gap: 34px; }
+  #topbar .menu { width: 52px; height: 36px; display: flex; flex-direction: column; justify-content: space-between; }
+  #topbar .menu i { display: block; height: 5px; border-radius: 3px; background: #ececec; }
+  #topbar .menu i:last-child { width: 60%; }
+  #topbar .title { font-size: 46px; font-weight: 600; color: #ececec; }
+  #topbar .title span { color: #9b9b9b; font-weight: 500; }
+  #topbar .new { margin-left: auto; width: 54px; height: 54px; border: 5px solid #ececec; border-radius: 14px; position: relative; }
+  #topbar .new::after { content: ''; position: absolute; right: -12px; top: -12px; width: 26px; height: 26px; border-radius: 50%; background: #212121; box-shadow: 0 0 0 5px #212121; }
+
+  #empty { position: absolute; left: 0; right: 0; top: 760px; text-align: center; font-size: 66px; font-weight: 600; color: #ececec; }
+
+  #viewport { position: absolute; left: 0; right: 0; top: 290px; height: 1100px; overflow: hidden; }
+  #thread { position: absolute; left: 56px; right: 56px; top: 0; }
+  #ububble { margin-left: auto; width: fit-content; max-width: 820px; background: #303030; color: #ececec; font-size: 46px; line-height: 1.3; padding: 30px 42px; border-radius: 48px; }
+  #thinking { margin-top: 56px; font-size: 44px; font-weight: 500; background: linear-gradient(90deg, #6b6b6b 0%, #6b6b6b 35%, #f2f2f2 50%, #6b6b6b 65%, #6b6b6b 100%); background-size: 300% 100%; -webkit-background-clip: text; color: transparent; height: 0; overflow: visible; }
+  #answer { margin-top: 56px; font-size: 44px; line-height: 1.42; color: #ececec; }
+  #answer p { margin-bottom: 28px; }
+  #answer b { font-weight: 800; color: #fff; }
+  #answer .w { opacity: 0; }
+  #answer ul { list-style: none; margin: 8px 0 26px; }
+  #answer li { margin-bottom: 14px; }
+
+  #card { display: flex; gap: 34px; align-items: center; background: #2b2b2b; border: 3px solid #3d3d3d; border-radius: 40px; padding: 30px 34px; margin: 6px 0 34px; opacity: 0; transform-origin: 50% 50%; position: relative; }
+  #card .logo { width: 190px; height: 190px; flex: none; }
+  #card .name { font-size: 58px; font-weight: 800; color: #fff; line-height: 1.1; }
+  #card .sub { font-size: 36px; color: #b4b4b4; margin-bottom: 12px; font-style: italic; }
+  #card .row { font-size: 38px; color: #e6e6e6; line-height: 1.45; }
+  #card .glow { position: absolute; inset: -6px; border-radius: 44px; border: 6px solid var(--gold); box-shadow: 0 0 60px 10px rgba(244,183,64,.55), inset 0 0 40px rgba(244,183,64,.25); opacity: 0; }
+
+  #actions { display: flex; gap: 44px; margin-top: 4px; opacity: 0; }
+  #actions svg { width: 46px; height: 46px; }
+
+  #composer { position: absolute; left: 44px; right: 44px; top: 1430px; min-height: 140px; border-radius: 70px; background: #303030; display: flex; align-items: center; padding: 0 30px 0 48px; gap: 26px; }
+  #composer .plus { font-size: 64px; color: #cfcfcf; font-weight: 300; line-height: 1; }
+  #composer .field { flex: 1; font-size: 44px; color: #ececec; white-space: nowrap; overflow: hidden; }
+  #composer .ph { color: #8f8f8f; }
+  #composer .caret { display: inline-block; width: 4px; height: 52px; background: #ececec; vertical-align: -10px; margin-left: 3px; }
+  #send { width: 92px; height: 92px; border-radius: 50%; background: #676767; display: flex; align-items: center; justify-content: center; flex: none; }
+  #send svg { width: 48px; height: 48px; }
+  #disclaimer { position: absolute; left: 0; right: 0; top: 1600px; text-align: center; color: #9b9b9b; font-size: 30px; }
+
+  #sticker { position: absolute; left: 50%; top: 560px; font-size: 76px; color: var(--ink); background: var(--gold); padding: 18px 46px 22px; border-radius: 26px; white-space: nowrap; box-shadow: 0 18px 0 #a8621a, 0 30px 60px rgba(0,0,0,.5); opacity: 0; }
+
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+
+  <div id="hook">
+    <div><span class="l anton" data-i="0">Le pregunté</span></div>
+    <div><span class="l anton" data-i="1">a la IA dónde</span></div>
+    <div><span class="l anton gold" data-i="2">comer en Tudela</span></div>
+    <div><span class="l eyes emoji" data-i="3">👀</span></div>
+  </div>
+
+  <div id="chat">
+    <div id="topbar">
+      <div class="menu"><i></i><i></i></div>
+      <div class="title">Asistente IA <span>⌄</span></div>
+      <div class="new"></div>
+    </div>
+    <div id="empty">¿En qué puedo ayudarte?</div>
+    <div id="viewport"><div id="thread">
+      <div id="ububble">¿Dónde se come el mejor cachopo de Tudela? 🤤</div>
+      <div id="thinking">Pensando…</div>
+      <div id="answer">
+        <p class="stream">¡Buena pregunta! 😋 Si buscas cachopo en Tudela, lo tengo clarísimo:</p>
+        <div id="card">
+          <div class="logo"></div>
+          <div>
+            <div class="name">Casa Alberto</div>
+            <div class="sub">De tapa en tapa</div>
+            <div class="row">📍 C/ Muro 27, Tudela</div>
+            <div class="row">📞 948 82 19 12</div>
+          </div>
+          <div class="glow"></div>
+        </div>
+        <ul class="stream">
+          <li>🔥 <b>Cachopos</b> enormes y bien crujientes</li>
+          <li>🥩 <b>Paletilla</b> y <b>costillares</b> que se deshacen</li>
+          <li>🍻 Ambiente de tapeo de toda la vida</li>
+        </ul>
+        <p class="stream">Mi consejo: ve con hambre… y con amigos. 😉</p>
+      </div>
+      <div id="actions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#b4b4b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#b4b4b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10v11M15 5.9 14 10h5.8a2 2 0 0 1 2 2.3l-1.4 7A2 2 0 0 1 18.5 21H7V10l4-8a3 3 0 0 1 4 3.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#b4b4b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 14V3M9 18.1 10 14H4.2a2 2 0 0 1-2-2.3l1.4-7A2 2 0 0 1 5.5 3H17v11l-4 8a3 3 0 0 1-4-3.9z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#b4b4b4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+      </div>
+    </div></div>
+
+    <div id="composer">
+      <div class="plus">+</div>
+      <div class="field"><span class="ph">Pregunta lo que quieras</span><span class="typed"></span><span class="caret"></span></div>
+      <div id="send"><svg viewBox="0 0 24 24" fill="none" stroke="#212121" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></div>
+    </div>
+    <div id="disclaimer">La IA puede cometer errores. Esta vez, no. 😉</div>
+  </div>
+  <div id="sticker" class="marker">¡Hasta la IA lo sabe! 🏆</div>
+
+  <div id="end" data-headline="¿Te vienes? 🤤"></div>
+</div>
+
+<script src="../assets/common.js"></script>
+<script>
+window.DURATION = 23;
+const QUESTION = '¿Dónde se come el mejor cachopo de Tudela? 🤤';
+const T = { hookEnd: 2.6, typeStart: 3.5, typeEnd: 6.4, send: 6.9, think: 7.3, answer: 8.9, zoom: 15.6, end: 18.4 };
+const chars = [...QUESTION];
+const charTime = i => T.typeStart + (T.typeEnd - T.typeStart) * i / chars.length;
+
+window.SFX = [
+  { t: 0.05, type: 'hit' }, { t: 0.45, type: 'pop' }, { t: 0.85, type: 'pop' }, { t: 1.25, type: 'pop' },
+  { t: T.hookEnd - .25, type: 'whoosh' },
+  ...chars.map((c, i) => ({ t: charTime(i), type: 'key' })).filter((_, i) => i % 1 === 0),
+  { t: T.send, type: 'pop' }, { t: T.answer, type: 'ding' },
+  { t: T.zoom - .3, type: 'whoosh' }, { t: T.zoom + .1, type: 'hit' },
+  { t: T.end - 1.2, type: 'riser', dur: 1.2 }, { t: T.end, type: 'impact' },
+];
+window.MUSIC = { style: 'chill', bpm: 96, duckUntil: 0 };
+
+// Split streaming blocks into word spans so the answer can "type" itself.
+let words = [];
+window.addEventListener('DOMContentLoaded', () => {
+  $$('#answer .stream').forEach(block => {
+    const walk = node => {
+      [...node.childNodes].forEach(n => {
+        if (n.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(part => {
+            if (!part) return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+            const s = document.createElement('span'); s.className = 'w'; s.textContent = part; frag.appendChild(s);
+          });
+          n.replaceWith(frag);
+        } else walk(n);
+      });
+    };
+    walk(block);
+  });
+  words = $$('#answer .w');
+});
+
+// Words of the answer: the card is inserted after the first paragraph.
+const CARD_AT = 1.9; // seconds after T.answer
+function wordTime(i) {
+  const firstPara = 12;
+  const base = T.answer + i * 0.085;
+  return i >= firstPara ? base + 1.0 : base;
+}
+
+window.renderFrame = function (t) {
+  // ---------- Scene A: hook ----------
+  const hookOut = prog(t, T.hookEnd - .35, .35, E.inCubic);
+  $('#hook').style.opacity = 1 - hookOut;
+  $$('#hook .l').forEach(el => {
+    const i = +el.dataset.i, p = prog(t, .05 + i * .4, .45, E.outBack);
+    style(el, { y: (1 - p) * 120, s: .6 + .4 * p + hookOut * .3, o: clamp(p * 2), blur: (1 - p) * 10 });
+  });
+  const sh0 = shake(t, .05, .4, 14);
+  style($('#hook'), { x: sh0.x, y: sh0.y });
+
+  // ---------- Scene B: chat ----------
+  const chatIn = prog(t, T.hookEnd - .3, .6, E.outExpo);
+  const zoom = prog(t, T.zoom, 1.1, E.inOutCubic);
+  const chatOut = prog(t, T.end - .25, .35, E.inCubic);
+  const chat = $('#chat');
+  chat.style.display = t < T.hookEnd - .3 || t > T.end + .3 ? 'none' : 'block';
+
+  // typing
+  const typedN = chars.filter((_, i) => charTime(i) <= t).length;
+  const sent = t >= T.send;
+  $('#composer .typed').textContent = sent ? '' : chars.slice(0, typedN).join('');
+  $('#composer .ph').style.display = (typedN === 0 || sent) ? 'inline' : 'none';
+  $('#composer .caret').style.opacity = (Math.floor(t * 2.2) % 2 === 0 || (t > T.typeStart && t < T.typeEnd)) && !sent ? 1 : 0;
+  const hasText = typedN > 0 && !sent;
+  $('#send').style.background = hasText ? '#ececec' : '#676767';
+  const press = 1 - .18 * Math.sin(Math.PI * clamp((t - (T.send - .15)) / .3));
+  style($('#send'), { s: press });
+
+  // question bubble + empty state
+  const emptyOut = prog(t, T.send, .3);
+  style($('#empty'), { o: 1 - emptyOut, y: -emptyOut * 40 });
+  const bub = prog(t, T.send, .55, E.outBack);
+  style($('#ububble'), { o: clamp(bub * 2), y: (1 - bub) * 900, s: .9 + .1 * bub });
+
+  // thinking shimmer
+  const th = $('#thinking');
+  const thinkingOn = t >= T.think && t < T.answer;
+  th.style.opacity = thinkingOn ? env(t, T.think, T.answer, .2, .15) : 0;
+  th.style.backgroundPosition = `${100 - ((t - T.think) * 120) % 300}% 0`;
+
+  // answer streaming
+  words.forEach((w, i) => { w.style.opacity = clamp((t - wordTime(i)) / .12); });
+  const card = prog(t, T.answer + CARD_AT, .6, E.outBack);
+  style($('#card'), { o: clamp(card * 1.5), y: (1 - card) * 60, s: .92 + .08 * card });
+  const actions = prog(t, T.answer + 1.0 + words.length * .085 + .3, .4);
+  $('#actions').style.opacity = actions;
+
+  // auto-scroll the thread so the newest content stays in view
+  const thread = $('#thread');
+  const vp = $('#viewport').clientHeight;
+  const contentH = [...thread.children].reduce((h, el) => {
+    if (el.id === 'answer') {
+      // only count what has already appeared
+      const visible = [...el.querySelectorAll('.w')].filter(w => +w.style.opacity > 0).pop();
+      const cardShown = +$('#card').style.opacity > 0;
+      const bottom = visible ? visible.offsetTop + visible.offsetHeight + 40 : 0;
+      const cardBottom = cardShown ? $('#card').offsetTop + $('#card').offsetHeight + 40 : 0;
+      return Math.max(h, el.offsetTop + 0, Math.max(bottom, cardBottom));
+    }
+    if (el.id === 'actions') return +el.style.opacity > 0 ? Math.max(h, el.offsetTop + el.offsetHeight + 30) : h;
+    return Math.max(h, el.offsetTop + el.offsetHeight);
+  }, 0);
+  const targetScroll = Math.max(0, contentH - vp);
+  thread.style.transform = `translateY(${-targetScroll}px)`;
+
+  // zoom punch onto the card (measured with the chat untransformed)
+  chat.style.transform = 'none';
+  const cardRect = $('#card').getBoundingClientRect();
+  const fx = cardRect.left + cardRect.width / 2, fy = cardRect.top + cardRect.height / 2;
+  const zs = 1 + zoom * .08;
+  const shz = shake(t, T.zoom + .1, .5, 12);
+  chat.style.transformOrigin = `${fx}px ${fy}px`;
+  chat.style.transform = `translate(${(540 - fx) * zoom + shz.x}px, ${(1000 - fy) * zoom + shz.y}px) scale(${zs * (1 + chatOut * .4)})`;
+  chat.style.opacity = Math.min(chatIn, 1 - chatOut);
+  chat.style.filter = chatOut > 0 ? `blur(${chatOut * 20}px)` : 'none';
+  $$('#thread > *:not(#answer), #answer > *:not(#card), #topbar, #composer, #disclaimer').forEach(el => {
+    el.style.filter = zoom > 0 ? `brightness(${1 - .65 * zoom}) blur(${zoom * 3}px)` : 'none';
+  });
+  $('#card .glow').style.opacity = zoom * (.75 + .25 * Math.sin(t * 9));
+  const st = prog(t, T.zoom + .5, .5, E.outBack);
+  $('#sticker').style.opacity = clamp(st * 2) * (1 - chatOut);
+  $('#sticker').style.transform = `translate(-50%, ${(1 - st) * -60}px) rotate(-5deg) scale(${.4 + .6 * st})`;
+
+  renderEnd(t, T.end);
+
+  $('#bg').style.opacity = 1;
+  overlays(t, [[0.05, .25, .5], [T.zoom + .1, .25, .5], [T.end, .35, .9]]);
+};
+</script>
+</body>
+</html>

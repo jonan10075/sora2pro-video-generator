@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel 2 · Anatomía del cachopo</title>
+<link rel="stylesheet" href="../assets/common.css">
+<style>
+  #bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 45%, #3b0d1a 0%, #1a070b 55%, #0a0304 100%); }
+  #spot { position: absolute; left: 50%; top: 1000px; width: 1600px; height: 1600px; margin: -800px 0 0 -800px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,190,110,.28) 0%, rgba(255,150,60,.08) 40%, transparent 65%); }
+
+  /* hook */
+  .slam { position: absolute; left: 50%; top: 50%; white-space: nowrap; text-align: center; opacity: 0; }
+  #w1, #w2, #w3 { font-size: 210px; color: var(--cream); }
+  #w3 { color: var(--gold); }
+  #w4 { font-size: 120px; color: var(--cream); top: 700px; }
+  #w5 { font-size: 300px; top: 960px; letter-spacing: 4px;
+    background: linear-gradient(180deg, #ffd889 0%, #f4a83a 45%, #c56a17 100%); -webkit-background-clip: text; color: transparent;
+    filter: drop-shadow(0 14px 0 #6b2a07) drop-shadow(0 30px 40px rgba(0,0,0,.6)); }
+
+  #title { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-size: 104px; color: var(--gold); opacity: 0; }
+  #title small { display: block; font-size: 54px; color: var(--cream); letter-spacing: 6px; margin-bottom: 8px; }
+
+  #scene { position: absolute; inset: 0; }
+  svg#food { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: visible; }
+
+  .label { position: absolute; width: 250px; font-size: 50px; line-height: 1; color: var(--cream); opacity: 0; }
+  .label i { display: block; font-style: normal; font-size: 40px; color: var(--gold); margin-bottom: 6px; }
+  .label.left { left: 30px; text-align: left; }
+  .label.right { right: 30px; text-align: right; }
+
+  #crunch { position: absolute; left: 50%; top: 520px; font-size: 190px; color: #fff; opacity: 0; white-space: nowrap;
+    -webkit-text-stroke: 8px var(--wine); paint-order: stroke fill; text-shadow: 0 16px 0 var(--wine-dark); }
+
+  #tagline { position: absolute; left: 0; right: 0; top: 250px; text-align: center; }
+  #tagline div { font-size: 112px; opacity: 0; }
+  #tagline .b { color: var(--gold); }
+
+  #more { position: absolute; inset: 0; background: var(--wine); overflow: hidden; display: none; }
+  #stripes { position: absolute; left: -50%; top: -50%; width: 200%; height: 200%;
+    background: repeating-linear-gradient(-30deg, rgba(255,255,255,.06) 0 60px, transparent 60px 120px); }
+  #more .intro { position: absolute; left: 0; right: 0; top: 330px; text-align: center; font-size: 84px; color: var(--cream); }
+  .chip { position: absolute; left: 50%; white-space: nowrap; font-size: 150px; padding: 20px 70px 26px; border-radius: 30px; opacity: 0; }
+  #c1 { top: 640px; background: var(--cream); color: var(--wine); box-shadow: 0 18px 0 #c9b9a5; }
+  #c2 { top: 960px; background: var(--gold); color: var(--ink); box-shadow: 0 18px 0 #a8621a; }
+  #c3 { top: 1290px; font-size: 110px; background: var(--ink); color: var(--cream); box-shadow: 0 18px 0 #000; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="bg"></div>
+  <div id="spot"></div>
+
+  <div id="scene">
+    <svg id="food" viewBox="0 0 1080 1920">
+      <defs>
+        <filter id="crumbs" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency=".055" numOctaves="4" seed="3" result="noise"/>
+          <feDiffuseLighting in="noise" surfaceScale="5" lighting-color="#fff" result="light">
+            <feDistantLight azimuth="235" elevation="48"/>
+          </feDiffuseLighting>
+          <feComposite in="light" in2="SourceGraphic" operator="arithmetic" k1="1.25" k2="0" k3="0" k4="0" result="lit"/>
+          <feComposite in="lit" in2="SourceAlpha" operator="in"/>
+        </filter>
+        <radialGradient id="goldTop" cx="45%" cy="35%" r="70%">
+          <stop offset="0" stop-color="#ffcf6e"/><stop offset=".55" stop-color="#eaa03a"/><stop offset="1" stop-color="#b8661c"/>
+        </radialGradient>
+        <linearGradient id="goldSide" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c9781f"/><stop offset="1" stop-color="#7c3f0d"/>
+        </linearGradient>
+        <radialGradient id="plate" cx="50%" cy="40%" r="60%">
+          <stop offset="0" stop-color="#ffffff"/><stop offset=".8" stop-color="#e9e4dc"/><stop offset="1" stop-color="#b9b2a8"/>
+        </radialGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+        <filter id="steamBlur"><feGaussianBlur stdDeviation="10"/></filter>
+      </defs>
+      <!-- exploded layers are injected here -->
+      <g id="layers"></g>
+      <!-- hero plate -->
+      <g id="hero" opacity="0">
+        <ellipse cx="540" cy="1190" rx="500" ry="215" fill="#000" opacity=".45" filter="url(#soft)"/>
+        <ellipse cx="540" cy="1150" rx="490" ry="205" fill="url(#plate)"/>
+        <ellipse cx="540" cy="1140" rx="400" ry="160" fill="none" stroke="#d6cfc4" stroke-width="5"/>
+        <g id="fries"></g>
+        <g id="backPiece"></g>
+        <g id="face"></g>
+        <g id="strands"></g>
+        <g id="frontPiece"></g>
+        <g id="steam" filter="url(#steamBlur)"></g>
+        <path id="knife" d="" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none" opacity="0"/>
+      </g>
+      <g id="particles"></g>
+    </svg>
+    <div id="labels"></div>
+  </div>
+
+  <div id="title" class="anton"><small>Anatomía de un</small>Cachopo</div>
+  <div id="crunch" class="anton">¡CRUNCH!</div>
+  <div id="tagline" class="anton"><div>Crujiente por fuera.</div><div class="b">Fundido por dentro.</div></div>
+
+  <div id="w1" class="slam anton">Esto</div>
+  <div id="w2" class="slam anton">no es</div>
+  <div id="w3" class="slam anton">un filete</div>
+  <div id="w4" class="slam anton">Es un</div>
+  <div id="w5" class="slam anton">Cachopo</div>
+
+  <div id="more">
+    <div id="stripes"></div>
+    <div class="intro anton">Y si eres más de…</div>
+    <div id="c1" class="chip anton">Paletilla 🍖</div>
+    <div id="c2" class="chip anton">Costillares 🔥</div>
+    <div id="c3" class="chip anton">…¡y mucho más! 😛</div>
+  </div>
+
+  <div id="end" data-headline="¿Te atreves con él? 😏"></div>
+</div>
+
+<script src="../assets/common.js"></script>
+<script>
+window.DURATION = 24;
+const T = { hook2: 1.55, layers: 3.1, slam: 8.9, hero: 9.5, cut: 11.9, more: 15.6, end: 18.8 };
+const NS = 'http://www.w3.org/2000/svg';
+const el = (tag, attrs = {}, parent) => {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  if (parent) parent.appendChild(e);
+  return e;
+};
+
+// From top to bottom of the finished cachopo.
+const LAYERS = [
+  { name: 'Empanado crujiente', top: 'url(#goldTop)', side: 'url(#goldSide)', h: 30, crumbs: true },
+  { name: 'Filete de ternera', top: '#a3523f', side: '#6e2c1f', h: 24 },
+  { name: 'Jamón serrano', top: '#d9707b', side: '#a3404c', h: 12, marbled: true },
+  { name: 'Queso fundido', top: '#ffd25a', side: '#e2a21c', h: 18, cheese: true },
+  { name: 'Filete de ternera', top: '#a3523f', side: '#6e2c1f', h: 24 },
+  { name: 'Empanado dorado', top: 'url(#goldTop)', side: 'url(#goldSide)', h: 30, crumbs: true },
+];
+const RX = 255, RY = 92, CX = 540;
+const layerG = [], labels = [];
+
+window.SFX = [
+  { t: 0.0, type: 'hit' }, { t: 0.42, type: 'hit' }, { t: 0.84, type: 'hit' },
+  { t: T.hook2, type: 'whoosh' }, { t: T.hook2 + .45, type: 'impact' },
+  { t: T.layers - .4, type: 'whoosh' },
+  ...LAYERS.map((_, i) => ({ t: T.layers + .3 + i * .78 + .35, type: 'pop' })),
+  { t: T.slam - .8, type: 'riser', dur: .8 }, { t: T.slam, type: 'crunch' }, { t: T.slam, type: 'hit' },
+  { t: T.hero + .3, type: 'whoosh' },
+  { t: T.cut - .1, type: 'whoosh', dur: .35 }, { t: T.cut + .45, type: 'crunch', gain: .6 },
+  { t: T.more - .3, type: 'whoosh' }, { t: T.more + .5, type: 'hit' }, { t: T.more + 1.1, type: 'hit' }, { t: T.more + 1.7, type: 'hit' },
+  { t: T.end - 1, type: 'riser', dur: 1 }, { t: T.end, type: 'impact' },
+];
+window.MUSIC = { style: 'trap', bpm: 140 };
+
+function disc(parent, cx, cy, rx, ry, h, top, side, opts = {}) {
+  const g = el('g', {}, parent);
+  el('ellipse', { cx, cy: cy + h, rx, ry, fill: side }, g);
+  el('rect', { x: cx - rx, y: cy, width: rx * 2, height: h, fill: side }, g);
+  el('ellipse', { cx, cy, rx, ry, fill: top, filter: opts.crumbs ? 'url(#crumbs)' : '' }, g);
+  if (opts.marbled) {
+    const id = 'marble' + (disc.n = (disc.n || 0) + 1);
+    el('ellipse', { cx, cy, rx: rx - 6, ry: ry - 6 }, el('clipPath', { id }, $('svg defs')));
+    const mg = el('g', { 'clip-path': `url(#${id})` }, g);
+    for (let k = 0; k < 5; k++) el('path', { d: `M ${cx - rx * .7 + k * 40} ${cy - 40 + k * 22} q 120 -30 ${180 + k * 20} 10 t 200 -16`, stroke: '#f7d4d0', 'stroke-width': 9, fill: 'none', opacity: .7, 'stroke-linecap': 'round' }, mg);
+  }
+  if (opts.cheese) {
+    const r = mulberry32(5);
+    for (let k = 0; k < 9; k++) {
+      const a = Math.PI * (.1 + .8 * k / 8);
+      const x = cx - Math.cos(a) * rx * .97, y = cy + h + Math.sin(a) * ry - 4;
+      const len = 26 + r() * 50;
+      el('path', { d: `M ${x - 13} ${y - 10} L ${x - 13} ${y + len} a 13 13 0 0 0 26 0 L ${x + 13} ${y - 10} Z`, fill: '#ffd25a', class: 'drip', 'data-len': len }, g);
+    }
+  }
+  return g;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const layers = $('#layers');
+  LAYERS.forEach((L, i) => {
+    const g = disc(layers, CX, 0, RX, RY, L.h, L.top, L.side, L);
+    layers.prepend(g); // upper layers must paint over lower ones
+    layerG.push(g);
+    const lab = document.createElement('div');
+    lab.className = 'label anton ' + (i % 2 ? 'right' : 'left');
+    lab.innerHTML = `<i>0${i + 1}</i>${L.name}`;
+    $('#labels').appendChild(lab); labels.push(lab);
+  });
+  buildHero();
+  const p = $('#particles'), r = mulberry32(11);
+  for (let i = 0; i < 70; i++) {
+    const c = el('circle', { r: 4 + r() * 10, fill: ['#f4b740', '#d9861e', '#ffd889', '#b8661c'][i % 4], opacity: 0 }, p);
+    Object.assign(c.dataset, { a: r() * Math.PI * 2, v: 500 + r() * 1100, g: 1500 + r() * 800 });
+  }
+});
+
+// ---------- hero cachopo (cut into a back and a front piece) ----------
+const H = { cx: 540, cy: 1060, rx: 380, ry: 150, th: 74, chord: 1095 };
+function buildHero() {
+  const hw = H.rx * Math.sqrt(1 - ((H.chord - H.cy) / H.ry) ** 2);
+  H.hw = hw;
+  const defs = $('svg defs');
+  el('rect', { x: 0, y: 0, width: 1080, height: H.chord, id: 'clipBackR' }, el('clipPath', { id: 'clipBack' }, defs));
+  el('rect', { x: 0, y: H.chord, width: 1080, height: 900 }, el('clipPath', { id: 'clipFront' }, defs));
+
+  const cyl = (parent, clip) => {
+    const g = el('g', { 'clip-path': `url(#${clip})` }, parent);
+    el('ellipse', { cx: H.cx, cy: H.cy + H.th, rx: H.rx, ry: H.ry, fill: 'url(#goldSide)', filter: 'url(#crumbs)' }, g);
+    el('rect', { x: H.cx - H.rx, y: H.cy, width: H.rx * 2, height: H.th, fill: 'url(#goldSide)', filter: 'url(#crumbs)' }, g);
+    el('ellipse', { cx: H.cx, cy: H.cy, rx: H.rx, ry: H.ry, fill: 'url(#goldTop)', filter: 'url(#crumbs)' }, g);
+    return g;
+  };
+  cyl($('#backPiece'), 'clipBack');
+  cyl($('#frontPiece'), 'clipFront');
+
+  // cut face of the back piece: crust / meat / ham / cheese / meat / crust
+  const face = $('#face');
+  const bands = [['#c9781f', 9], ['#9a4a37', 14], ['#d9707b', 8], ['#ffd25a', 14], ['#9a4a37', 14], ['#c9781f', 15]];
+  let y = H.chord;
+  const faceG = el('g', {}, face);
+  el('clipPath', { id: 'faceClip' }, $('svg defs')).appendChild(el('rect', { x: H.cx - hw, y: H.chord, width: hw * 2, height: H.th, rx: 18 }));
+  faceG.setAttribute('clip-path', 'url(#faceClip)');
+  bands.forEach(([c, h]) => { el('rect', { x: H.cx - hw, y, width: hw * 2, height: h + 1, fill: c }, faceG); y += h; });
+  const r = mulberry32(21);
+  for (let k = 0; k < 7; k++) {
+    const x = H.cx - hw * .8 + k * hw * .27 + r() * 20;
+    el('path', { class: 'fdrip', 'data-len': 30 + r() * 40, d: '', fill: '#ffd25a' }, face);
+    face.lastChild.dataset.x = x;
+  }
+  // cheese strands bridging the gap
+  for (let k = 0; k < 6; k++) {
+    el('path', { class: 'strand', fill: '#ffd25a', d: '' }, $('#strands')).dataset.x = H.cx - hw * .75 + k * hw * .3 + (k % 2) * 12;
+  }
+  // a few fries and a pepper on the plate
+  const fr = $('#fries'), rr = mulberry32(4);
+  for (let k = 0; k < 9; k++) {
+    const x = 140 + rr() * 150 + (k > 4 ? 560 : 0), yy = 1160 + rr() * 90;
+    el('rect', { x, y: yy, width: 90 + rr() * 40, height: 24, rx: 8, fill: k % 3 ? '#f2c85b' : '#e6b043', stroke: '#c58c22', 'stroke-width': 3, transform: `rotate(${-30 + rr() * 60} ${x} ${yy})` }, fr);
+  }
+  el('path', { d: 'M 760 1225 q 70 -40 150 -10 q -10 30 -60 34 q -60 6 -90 -24 z', fill: '#2f7d32', stroke: '#1d5320', 'stroke-width': 4 }, fr);
+  for (let k = 0; k < 5; k++) el('path', { class: 'steam', d: '', stroke: '#fff', 'stroke-width': 20, fill: 'none', 'stroke-linecap': 'round' }, $('#steam'));
+}
+
+function renderHero(t) {
+  const hero = $('#hero');
+  const hin = prog(t, T.hero, .5, E.outCubic), hout = prog(t, T.more - .25, .3, E.inCubic);
+  hero.setAttribute('opacity', Math.min(hin, 1 - hout));
+  const push = 1 + .08 * prog(t, T.hero, T.more - T.hero, E.linear) + (1 - E.outBack(clamp((t - T.hero) / .6))) * -.15;
+  hero.setAttribute('transform', `translate(540 1100) scale(${push}) translate(-540 -1100)`);
+
+  // knife slash and the separation of the front piece
+  const k = prog(t, T.cut, .35, E.inOutCubic);
+  const knife = $('#knife');
+  const x0 = H.cx - H.hw - 60, x1 = H.cx + H.hw + 60;
+  knife.setAttribute('d', `M ${x0} ${H.chord} L ${lerp(x0, x1, k)} ${H.chord}`);
+  knife.setAttribute('opacity', k > 0 ? 1 - prog(t, T.cut + .35, .25) : 0);
+  const gap = 95 * prog(t, T.cut + .45, 1.6, E.outCubic);
+  $('#frontPiece').setAttribute('transform', `translate(0 ${gap})`);
+  $('#face').setAttribute('opacity', gap > 1 ? 1 : 0);
+  const cheeseY = H.chord + 9 + 14 + 8 + 7;
+  $$('.fdrip').forEach(d => {
+    const len = +d.dataset.len * prog(t, T.cut + .8, 2.5, E.outCubic), x = +d.dataset.x;
+    d.setAttribute('d', `M ${x - 10} ${cheeseY} L ${x - 10} ${cheeseY + len} a 10 10 0 0 0 20 0 L ${x + 10} ${cheeseY} Z`);
+  });
+  $$('.strand').forEach((s, i) => {
+    const x = +s.dataset.x;
+    const stretch = gap / 95;
+    const w = Math.max(3, 16 * (1 - stretch * .7) + Math.sin(i * 2 + t) * 2);
+    const yA = cheeseY, yB = H.chord + gap + 6, sag = 12 * stretch;
+    s.setAttribute('d', gap < 2 ? '' :
+      `M ${x - w} ${yA} C ${x - w * .4} ${lerp(yA, yB, .5)}, ${x - w * .4 + sag} ${lerp(yA, yB, .6)}, ${x - w * 1.2} ${yB}
+       L ${x + w * 1.2} ${yB} C ${x + w * .4 + sag} ${lerp(yA, yB, .6)}, ${x + w * .4} ${lerp(yA, yB, .5)}, ${x + w} ${yA} Z`);
+  });
+  $$('.steam').forEach((s, i) => {
+    const ph = ((t * .45 + i / 5) % 1);
+    const x = 380 + i * 80, y0 = 1020 - ph * 420;
+    s.setAttribute('d', `M ${x} ${y0} q 40 -50 0 -100 q -40 -50 0 -100`);
+    s.setAttribute('opacity', .32 * Math.sin(Math.PI * ph) * hin);
+  });
+}
+
+function layerY(i, t) {
+  // exploded position, then the slam stacks every layer onto the plate
+  const spacing = 168, top0 = 560;
+  const exploded = top0 + i * spacing;
+  let stacked = 1000;
+  for (let j = 0; j < i; j++) stacked += LAYERS[j].h;
+  const s = prog(t, T.slam - .45, .45, E.inExpo);
+  return lerp(exploded, stacked, s) - 600 * (1 - prog(t, T.layers + .3 + i * .78, .55, E.outBack));
+}
+
+window.renderFrame = function (t) {
+  const sh = [shake(t, 0, .3, 18), shake(t, .42, .3, 18), shake(t, .84, .3, 18), shake(t, T.hook2 + .45, .5, 26), shake(t, T.slam, .6, 34), shake(t, T.more + .5, .3, 16), shake(t, T.more + 1.1, .3, 16), shake(t, T.more + 1.7, .3, 16)]
+    .reduce((a, b) => ({ x: a.x + b.x, y: a.y + b.y, r: a.r + b.r }), { x: 0, y: 0, r: 0 });
+  $('#stage').style.transform = `translate(${sh.x}px, ${sh.y}px) rotate(${sh.r}deg)`;
+
+  // ---------- hook ----------
+  [['#w1', 0], ['#w2', .42], ['#w3', .84]].forEach(([id, a]) => {
+    const p = prog(t, a, .25, E.outExpo);
+    const out = prog(t, a + .4, .08, E.linear);
+    style($(id), { center: true, s: 2.4 - 1.4 * p, o: p * (1 - out), y: 0 });
+  });
+  const w4 = prog(t, T.hook2, .3, E.outBack), w5 = prog(t, T.hook2 + .4, .35, E.outBack);
+  const hookOut = prog(t, T.layers - .4, .35, E.inCubic);
+  style($('#w4'), { center: true, s: .5 + .5 * w4, o: clamp(w4 * 2) * (1 - hookOut), y: -hookOut * 200 });
+  style($('#w5'), { center: true, s: (3 - 2 * w5) * (1 + hookOut * .4) + .02 * Math.sin(t * 20) * (t < T.layers - .4 ? 1 : 0), o: clamp(w5 * 3) * (1 - hookOut), r: -3 });
+
+  // ---------- exploded layers ----------
+  const layersVisible = t >= T.layers && t < T.hero + .3;
+  $('#layers').style.display = layersVisible ? 'block' : 'none';
+  const fadeLayers = 1 - prog(t, T.hero - .05, .3);
+  const tl = prog(t, T.layers, .5, E.outBack);
+  style($('#title'), { s: .7 + .3 * tl, o: clamp(tl * 2) * (1 - prog(t, T.slam - .4, .3)) });
+  layerG.forEach((g, i) => {
+    const y = layerY(i, t);
+    const wob = Math.sin(t * 2 + i) * 6 * (1 - prog(t, T.slam - .45, .3));
+    g.setAttribute('transform', `translate(0 ${y + wob})`);
+    g.setAttribute('opacity', clamp((t - T.layers - .3 - i * .78) * 4) * fadeLayers);
+    const lab = labels[i];
+    const lp = prog(t, T.layers + .55 + i * .78, .4, E.outBack);
+    const lout = prog(t, T.slam - .5, .3);
+    lab.style.top = `${y + wob - 30}px`;
+    lab.style.opacity = clamp(lp * 2) * (1 - lout);
+    lab.style.transform = `translateX(${(1 - lp) * (i % 2 ? 300 : -300)}px)`;
+  });
+  $$('.drip').forEach(d => {
+    const len = +d.getAttribute('data-len');
+    d.setAttribute('transform-origin', 'center top');
+    d.style.transform = `scaleY(${.3 + .7 * prog(t, T.layers + 3, 3, E.outCubic)})`;
+    d.style.transformBox = 'fill-box';
+  });
+
+  // ---------- crunch ----------
+  const cr = prog(t, T.slam, .35, E.outBack);
+  style($('#crunch'), { center: true, s: .3 + .9 * cr, r: -8, o: clamp(cr * 3) * (1 - prog(t, T.slam + .8, .3)) });
+  $$('#particles circle').forEach(c => {
+    const dt = t - T.slam;
+    if (dt < 0 || dt > 1.6) { c.setAttribute('opacity', 0); return; }
+    const a = +c.dataset.a, v = +c.dataset.v, g = +c.dataset.g;
+    c.setAttribute('cx', 540 + Math.cos(a) * v * dt);
+    c.setAttribute('cy', 1050 + Math.sin(a) * v * dt * .6 - 500 * dt + g * dt * dt * .5);
+    c.setAttribute('opacity', 1 - dt / 1.6);
+  });
+
+  // ---------- hero ----------
+  renderHero(t);
+  $$('#tagline div').forEach((d, i) => {
+    const p = prog(t, T.hero + .4 + i * .6, .45, E.outBack);
+    style(d, { y: (1 - p) * 60, s: .8 + .2 * p, o: clamp(p * 2) * (1 - prog(t, T.more - .3, .3)) });
+  });
+  $('#spot').style.opacity = .6 + .4 * Math.sin(t * 1.3);
+
+  // ---------- more ----------
+  const more = $('#more');
+  const mIn = prog(t, T.more - .2, .35, E.outExpo);
+  more.style.display = mIn > 0 && t < T.end + .3 ? 'block' : 'none';
+  more.style.clipPath = `circle(${mIn * 140}% at 50% 50%)`;
+  $('#stripes').style.transform = `translateX(${(t * 80) % 139}px)`;
+  const intro = prog(t, T.more + .1, .4, E.outBack);
+  style($('#more .intro'), { o: intro, y: (1 - intro) * -60 });
+  ['#c1', '#c2', '#c3'].forEach((id, i) => {
+    const p = prog(t, T.more + .5 + i * .6, .45, E.outBack);
+    $(id).style.opacity = clamp(p * 3);
+    $(id).style.transform = `translateX(-50%) rotate(${(i - 1) * 3 + (1 - p) * 20}deg) scale(${.2 + .8 * p})`;
+  });
+
+  renderEnd(t, T.end);
+  overlays(t, [[0, .15, .35], [.42, .15, .35], [.84, .15, .35], [T.hook2 + .45, .2, .6], [T.slam, .3, .9], [T.end, .35, .9]]);
+};
+</script>
+</body>
+</html>
